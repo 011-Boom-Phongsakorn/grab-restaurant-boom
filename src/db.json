@@ -53,6 +53,25 @@
       "title": "Namo Home Café Roti Coffee Milk Tea Food byครัวแสนแหล๋น - งามวงศ์วาน",
       "type": "ของหวาน",
       "img": "https://food-cms.grab.com/compressed_webp/merchants/3-C2EJTYC2ENMBEA/hero/a701098f0c3245c6bb29334ef2293054_1608967477104520062.webp"
+    },
+    {
+      "id": "13",
+      "title": "Mocka Rachaburi Let's go",
+      "type": "กาแฟ",
+      "img": "https://food-cms.grab.com/compressed_webp/merchants/3-C2NYFCCDEE3VGE/hero/c77ace34288d449c95f8e456698d3581_1658460676354176549.webp"
+    },
+    {
+      "id": "b37a",
+      "title": "shabu",
+      "type": "s+",
+      "img": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/rrlhotd7yypnpeb2feg8/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%20Shibuya%20Shabu%20%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%AF.jpg"
+    }
+  ],
+  "users": [
+    {
+      "username": "user1",
+      "password": "123456",
+      "id": "8ee2"
     }
   ]
 }
