@@ -1,6 +1,21 @@
 import React from 'react'
 
-const Card = ({ title, type, img}) => {
+const Card = ({ id, title, type, img }) => {
+
+  const deleted = async (id) => {
+    try {
+      // async await 
+      const response = await fetch(`http://localhost:5000/restaurants/${id}`, {
+        method: "DELETE",
+      })
+      if (response.ok) {
+        alert("Restaurant Deleted successfully!")
+        window.location.reload();
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <figure>
@@ -15,8 +30,8 @@ const Card = ({ title, type, img}) => {
         </h2>
         <p>{type}</p>
         <div className="card-actions justify-end">
-          <div className="badge badge-outline">Delete</div>
-          <div className="badge badge-outline">Edit</div>
+          <div onClick={() => deleted(id)} className="badge badge-outline">Delete</div>
+          <a href={`/update/${id}`} className="badge badge-outline cursor-pointer">Edit</a>
         </div>
       </div>
     </div>

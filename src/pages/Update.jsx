@@ -1,16 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Drop from '../components/Drop'
+import { useParams } from 'react-router'
 
 
+const Update = () => {
 
-const AddRestaurant = () => {
+    // 1. Get from url
+    const { id } = useParams()
+
+   
 
     const [restaurant, setRestaurant] = useState({
         title: '',
         type: '',
         img: ''
     });
+
+     //  2. Get Restaurant by ID
+     useEffect(() => {
+        fetch(`http://localhost:5000/restaurants/${id}`)
+            .then((res) => {
+                //  convert text to json format
+                return res.json();
+            })
+            .then((resp) => {
+                // save to state
+                setRestaurant(resp)
+            })
+            .catch((e) => {
+                // catch error
+                console.log(e.message)
+            })
+
+
+    }, [id])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -20,31 +44,30 @@ const AddRestaurant = () => {
     const handleSubmit = async () => {
         try {
             // async await 
-            const response = await fetch('http://localhost:5000/restaurants', {
-                method: "POST",
+            const response = await fetch(`http://localhost:5000/restaurants/${id}`, {
+                method: "PUT",
                 body: JSON.stringify(restaurant)
             })
-            
-            if (response.ok){
-                alert("Restaurant added successfully!")
+
+            if (response.ok) {
+                alert("Restaurant Updated successfully!")
                 setRestaurant({
                     title: '',
                     type: '',
                     img: ''
                 })
             }
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     }
 
     return (
         <>
-            
             <div className='flex justify-center items-center text-center mt-5'>
                 <form className='border w-[500px] space-y-5 p-10 rounded-2xl shadow-lg shadow-cyan-500/50'>
                     <div>
-                        Add
+                        Update
                     </div>
                     <div className='space-x-2'>
                         <Drop />
@@ -60,7 +83,7 @@ const AddRestaurant = () => {
                     </div>
                     <div className='space-x-2'>
                         <button type='submit' className='bg-linear-to-r rounded-[2px] shadow-lg shadow-red-500/50 from-red-500 to-pink-500 w-[100px] cursor-pointer'>Cancel</button>
-                        <button onClick={handleSubmit} type='submit' className='bg-linear-to-r rounded-[2px] shadow-lg shadow-blue-500/50 from-blue-500 to-blue-800 w-[100px] cursor-pointer'>Add</button>
+                        <button onClick={handleSubmit} type='submit' className='bg-linear-to-r rounded-[2px] shadow-lg shadow-blue-500/50 from-blue-500 to-blue-800 w-[100px] cursor-pointer'>Update</button>
                     </div>
                     <div>
                         {
@@ -77,4 +100,4 @@ const AddRestaurant = () => {
     )
 }
 
-export default AddRestaurant
+export default Update

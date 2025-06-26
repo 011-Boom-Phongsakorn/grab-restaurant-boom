@@ -5,6 +5,7 @@ import Restaurants from '../components/Restaurants'
 const Home = () => {
 
   const [restaurants, setRestaurants] = useState([])
+  const [filteredRestaurant, setFilteredRestaurant] = useState([])
 
   useEffect(() => {
 
@@ -17,6 +18,7 @@ const Home = () => {
     .then((resp) => {
       // save to state
       setRestaurants(resp)
+      setFilteredRestaurant(resp)
     })
     .catch((e) => {
       // catch error
@@ -25,10 +27,25 @@ const Home = () => {
 
   }, [])
 
+  const handleSearch = (keyword) => {
+    if (keyword === '') {
+      setFilteredRestaurant(restaurants)
+      return;
+    }
+
+    const result = restaurants.filter((restaurant) => {
+      return (
+        restaurant.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()) ||
+        restaurant.type.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
+      )
+    })
+    setFilteredRestaurant(result)
+    // console.log(result)
+  }
+
   return (
     <div className='container mx-auto'>
       {/* Navigation */}
-      <Navbar />
       {/* Header */}
       <div>
         <h1 className='justify-center text-3xl text-center m-5 p-5'>Grab Restaurant</h1>
@@ -48,11 +65,11 @@ const Home = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search" />
+          <input type="search" required placeholder="Search" name='keyword' onChange={(e) => handleSearch(e.target.value)} />
         </label>
       </div>
       {/* Result */}
-      <Restaurants restaurants={restaurants} />
+      <Restaurants restaurants={filteredRestaurant} />
     </div>
   )
 }
